@@ -138,5 +138,4 @@ namespace Staff_Monitor_Engagement
             Console.WriteLine("Meeting scheduled successfully.");
         }
     }
-
 }

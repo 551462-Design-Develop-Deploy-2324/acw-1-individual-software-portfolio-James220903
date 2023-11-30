@@ -73,8 +73,8 @@ namespace Staff_Monitor_Engagement
                     }
                     break;
                 case UserRole.SeniorTutor:
-                    // Call a method to handle senior tutor functionality
-                    // SeniorTutorUI.ShowMenu(); // Make sure you implement this
+                    SeniorTutorUI seniorTutorUI = new SeniorTutorUI(myDatabase);
+                    seniorTutorUI.ShowMenu();
                     break;
                 case UserRole.None:
                 default:
