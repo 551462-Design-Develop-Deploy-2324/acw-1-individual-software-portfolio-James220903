@@ -1,0 +1,17 @@
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\Staff Monitor Engagement.exe.config
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\Staff Monitor Engagement.exe
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\Staff Monitor Engagement.pdb
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\EntityFramework.dll
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\System.Data.SQLite.dll
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\EntityFramework.xml
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\bin\Debug\System.Data.SQLite.xml
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\obj\Debug\Staff Monitor Engagement.csproj.AssemblyReference.cache
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\obj\Debug\Staff Monitor Engagement.csproj.SuggestedBindingRedirects.cache
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\obj\Debug\Staff Monitor Engagement.csproj.CoreCompileInputs.cache
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\obj\Debug\Staff Monitor Engagement.csproj.CopyComplete
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\obj\Debug\Staff Monitor Engagement.exe
+C:\Users\James\Desktop\individual software project\Staff Monitor Engagement\obj\Debug\Staff Monitor Engagement.pdb
