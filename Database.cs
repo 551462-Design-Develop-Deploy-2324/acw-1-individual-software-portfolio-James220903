@@ -230,6 +230,7 @@ namespace Staff_Monitor_Engagement
 
             return reports;
         }
+        
         // Read: Get all meetings for a student by student ID
         public List<Meeting> GetAllMeetingsForStudent(int studentId)
         {
@@ -548,6 +549,25 @@ namespace Staff_Monitor_Engagement
                 return userCount > 0;
             }
         }
+        public int GetStudentIdByUsername(string username)
+        {
+            using (var sqlite_cmd = sqlite_conn.CreateCommand())
+            {
+                sqlite_cmd.CommandText = "SELECT StudentID FROM STUDENT WHERE Username = @Username";
+                sqlite_cmd.Parameters.AddWithValue("@Username", username);
+
+                var result = sqlite_cmd.ExecuteScalar();
+                if (result != null)
+                {
+                    return Convert.ToInt32(result);
+                }
+                else
+                {
+                    return -1; // Or handle this case as appropriate (e.g., throw an exception)
+                }
+            }
+        }
+
 
 
 

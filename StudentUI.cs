@@ -8,25 +8,80 @@ namespace Staff_Monitor_Engagement
 {
     public class StudentUI
     {
-        public static void ShowMenu()
-        {
-            Console.WriteLine("Student Menu:");
-            Console.WriteLine("1. View Self Reports");
-            // Add more options as needed
+        private Database database;
+        private int studentId;
 
-            string option = Console.ReadLine();
-            switch (option)
+        public StudentUI(Database db, int studentId)
+        {
+            this.database = db;
+            this.studentId = studentId; // Initialize the field with the value passed to the constructor
+        }
+
+        public void ShowMenu()
+        {
+            bool exitMenu = false;
+
+            while (!exitMenu)
             {
-                case "1":
-                    ViewSelfReports();
-                    break;
-                    // Add more cases for other options
+                Console.Clear();
+                Console.WriteLine("Student Menu:");
+                Console.WriteLine("1. View Self Reports");
+                Console.WriteLine("2. Schedule Meeting with Supervisor");
+                Console.WriteLine("3. Logout");
+
+                Console.Write("Select an option: ");
+                string option = Console.ReadLine();
+
+                switch (option)
+                {
+                    case "1":
+                        ViewSelfReports();
+                        break;
+                    case "2":
+                        ScheduleMeeting();
+                        break;
+                    case "3":
+                        exitMenu = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option. Please try again.");
+                        break;
+                }
+
+                if (!exitMenu)
+                {
+                    Console.WriteLine("Press any key to return to the menu...");
+                    Console.ReadKey();
+                }
             }
         }
 
-        private static void ViewSelfReports()
+        private void ViewSelfReports()
         {
-            // Implement functionality to view self-reports
+            var selfReports = database.GetAllSelfReportsForStudent(studentId);
+
+            if (selfReports.Any())
+            {
+                Console.WriteLine("\nYour Self Reports:");
+                foreach (var report in selfReports)
+                {
+                    Console.WriteLine($"Date: {report.ReportDate}, Content: {report.ReportContent}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("\nNo self-reports found.");
+            }
+
+            Console.WriteLine("\nPress any key to return to the menu...");
+            Console.ReadKey();
+        }
+
+
+        private void ScheduleMeeting()
+        {
+            // Implementation to schedule a meeting with a supervisor
+            // This could involve selecting a supervisor, choosing a date and time, etc.
         }
     }
 }

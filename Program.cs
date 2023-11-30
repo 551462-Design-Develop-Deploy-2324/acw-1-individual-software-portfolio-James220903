@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Security.Cryptography.X509Certificates;
 
+
 namespace Staff_Monitor_Engagement
 {
     public enum UserRole
@@ -27,7 +28,7 @@ namespace Staff_Monitor_Engagement
             // Optional: Uncomment to seed the database with initial data
             //DataSeeder seeder = new DataSeeder(myDatabase);
             //seeder.InsertSampleData();
-
+            
             Console.WriteLine("Welcome to the Staff Monitor Engagement System");
             
 
@@ -42,20 +43,30 @@ namespace Staff_Monitor_Engagement
             string password = Console.ReadLine(); // In a real application, consider using a more secure method to handle password input
 
             UserRole role = myDatabase.Login(username, password);
+            int studentId = myDatabase.GetStudentIdByUsername(username);
 
             switch (role)
             {
                 case UserRole.Student:
-                    // Call a method to handle student functionality
-                    StudentUI.ShowMenu();
+                    // Use the previously declared studentId variable
+                    if (studentId != -1)
+                    {
+                        StudentUI studentUI = new StudentUI(myDatabase, studentId);
+                        studentUI.ShowMenu();
+                    }
+                    else
+                    {
+                        // Handle the case where the student ID couldn't be found
+                        Console.WriteLine("Student ID not found.");
+                    }
                     break;
                 case UserRole.PersonalSupervisor:
                     // Call a method to handle personal supervisor functionality
-                    PersonalSupervisorUI.ShowMenu();
+                    // PersonalSupervisorUI.ShowMenu(); // Make sure you implement this
                     break;
                 case UserRole.SeniorTutor:
                     // Call a method to handle senior tutor functionality
-                    SeniorTutorUI.ShowMenu();
+                    // SeniorTutorUI.ShowMenu(); // Make sure you implement this
                     break;
                 case UserRole.None:
                 default:
