@@ -78,10 +78,34 @@ namespace Staff_Monitor_Engagement
         }
 
 
-        private void ScheduleMeeting()
+        public void ScheduleMeeting()
         {
-            // Implementation to schedule a meeting with a supervisor
-            // This could involve selecting a supervisor, choosing a date and time, etc.
+            Console.WriteLine("\nSchedule a Meeting with Your Supervisor");
+
+            // Assuming each student is assigned to one personal supervisor
+            var supervisorId = GetSupervisorIdForStudent(studentId);
+            if (supervisorId == -1)
+            {
+                Console.WriteLine("No supervisor assigned to you.");
+                return;
+            }
+
+            Console.Write("Enter the date for the meeting (YYYY-MM-DD): ");
+            string meetingDate = Console.ReadLine();
+            Console.Write("Enter the subject for the meeting: ");
+            string meetingSubject = Console.ReadLine();
+            Console.Write("Enter any notes for the meeting: ");
+            string meetingNotes = Console.ReadLine();
+
+            // Call the Database method to insert the meeting
+            database.InsertMeeting(studentId, supervisorId, meetingDate, meetingSubject, meetingNotes);
+
+            Console.WriteLine("Meeting scheduled successfully.");
+        }
+        private int GetSupervisorIdForStudent(int studentId)
+        {
+            // Call the method in the Database class to get the supervisor ID
+            return database.GetSupervisorIdByStudentId(studentId);
         }
     }
 }

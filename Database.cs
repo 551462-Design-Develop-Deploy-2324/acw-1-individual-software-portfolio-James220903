@@ -567,6 +567,24 @@ namespace Staff_Monitor_Engagement
                 }
             }
         }
+        public int GetSupervisorIdByStudentId(int studentId)
+        {
+            using (var sqlite_cmd = sqlite_conn.CreateCommand())
+            {
+                sqlite_cmd.CommandText = "SELECT SupervisorID FROM RELATIONSHIP WHERE StudentID = @StudentID";
+                sqlite_cmd.Parameters.AddWithValue("@StudentID", studentId);
+
+                var result = sqlite_cmd.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    return Convert.ToInt32(result);
+                }
+                else
+                {
+                    return -1; // Or handle this case as appropriate
+                }
+            }
+        }
 
 
 
