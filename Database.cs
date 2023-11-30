@@ -655,9 +655,81 @@ namespace Staff_Monitor_Engagement
             }
             return meetings;
         }
+        public List<Meeting> GetAllMeetings()
+        {
+            List<Meeting> meetings = new List<Meeting>();
+            using (var sqlite_cmd = sqlite_conn.CreateCommand())
+            {
+                sqlite_cmd.CommandText = "SELECT * FROM MEETINGS";
 
+                using (var reader = sqlite_cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        meetings.Add(new Meeting
+                        {
+                            // Assuming Meeting class has properties like Id, StudentId, SupervisorId, MeetingDate, etc.
+                            Id = Convert.ToInt32(reader["MeetingID"]),
+                            StudentId = Convert.ToInt32(reader["StudentID"]),
+                            SupervisorId = Convert.ToInt32(reader["SupervisorID"]),
+                            MeetingDate = reader["MeetingDate"].ToString(),
+                            MeetingSubject = reader["MeetingSubject"].ToString(),
+                            MeetingNotes = reader["MeetingNotes"].ToString(),
+                            // ... other properties
+                        });
+                    }
+                }
+            }
+            return meetings;
+        }
+        public List<SelfReport> GetAllSelfReports()
+        {
+            List<SelfReport> selfReports = new List<SelfReport>();
+            using (var sqlite_cmd = sqlite_conn.CreateCommand())
+            {
+                sqlite_cmd.CommandText = "SELECT * FROM SELF_REPORTS";
 
+                using (var reader = sqlite_cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        selfReports.Add(new SelfReport
+                        {
+                            Id = Convert.ToInt32(reader["SelfReportID"]),
+                            StudentId = Convert.ToInt32(reader["StudentID"]),
+                            ReportDate = reader["ReportDate"].ToString(),
+                            ReportContent = reader["ReportContent"].ToString()
+                        });
+                    }
+                }
+            }
+            return selfReports;
+        }
+        public void AddNewStudent(string username, string passwordHash, string firstName, string lastName)
+        {
+            using (var sqlite_cmd = sqlite_conn.CreateCommand())
+            {
+                sqlite_cmd.CommandText = "INSERT INTO STUDENT (Username, PasswordHash, FirstName, LastName) VALUES (@Username, @PasswordHash, @FirstName, @LastName);";
+                sqlite_cmd.Parameters.AddWithValue("@Username", username);
+                sqlite_cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                sqlite_cmd.Parameters.AddWithValue("@FirstName", firstName);
+                sqlite_cmd.Parameters.AddWithValue("@LastName", lastName);
 
+                sqlite_cmd.ExecuteNonQuery();
+            }
+        }
+        public void AddNewPersonalSupervisor(string username, string passwordHash, string firstName, string lastName)
+        {
+            using (var sqlite_cmd = sqlite_conn.CreateCommand())
+            {
+                sqlite_cmd.CommandText = "INSERT INTO PERSONAL_SUPERVISOR (Username, PasswordHash, FirstName, LastName) VALUES (@Username, @PasswordHash, @FirstName, @LastName);";
+                sqlite_cmd.Parameters.AddWithValue("@Username", username);
+                sqlite_cmd.Parameters.AddWithValue("@PasswordHash", passwordHash);
+                sqlite_cmd.Parameters.AddWithValue("@FirstName", firstName);
+                sqlite_cmd.Parameters.AddWithValue("@LastName", lastName);
 
+                sqlite_cmd.ExecuteNonQuery();
+            }
+        }
     }
 }
