@@ -28,6 +28,10 @@ namespace Staff_Monitor_Engagement
                 Console.WriteLine("1. View Self Reports");
                 Console.WriteLine("2. Schedule Meeting with Supervisor");
                 Console.WriteLine("3. Logout");
+                Console.WriteLine("4. Create Self Report");
+                Console.WriteLine("5. View Scheduled Meetings");
+
+
 
                 Console.Write("Select an option: ");
                 string option = Console.ReadLine();
@@ -42,6 +46,12 @@ namespace Staff_Monitor_Engagement
                         break;
                     case "3":
                         exitMenu = true;
+                        break;
+                    case "4":
+                        CreateSelfReport();
+                        break;
+                    case "5":
+                        ViewMeetings();
                         break;
                     default:
                         Console.WriteLine("Invalid option. Please try again.");
@@ -107,5 +117,43 @@ namespace Staff_Monitor_Engagement
             // Call the method in the Database class to get the supervisor ID
             return database.GetSupervisorIdByStudentId(studentId);
         }
+        public void CreateSelfReport()
+        {
+            Console.WriteLine("\nCreate a New Self Report");
+
+            Console.Write("Enter the report content: ");
+            string reportContent = Console.ReadLine();
+
+            // Get current date as the report date
+            string reportDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+            // Call the Database method to insert the self-report
+            database.InsertSelfReport(studentId, reportDate, reportContent);
+
+            Console.WriteLine("Self-report submitted successfully.");
+        }
+        public void ViewMeetings()
+        {
+            Console.WriteLine("\nYour Scheduled Meetings:");
+
+            var meetings = database.GetAllMeetingsForStudent(studentId);
+
+            if (meetings.Any())
+            {
+                foreach (var meeting in meetings)
+                {
+                    Console.WriteLine($"Date: {meeting.MeetingDate}, Subject: {meeting.MeetingSubject}, Notes: {meeting.MeetingNotes}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No meetings scheduled.");
+            }
+
+            Console.WriteLine("\nPress any key to return to the menu...");
+            Console.ReadKey();
+        }
+
+
     }
 }
