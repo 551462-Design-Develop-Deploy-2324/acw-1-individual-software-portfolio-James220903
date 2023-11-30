@@ -628,6 +628,33 @@ namespace Staff_Monitor_Engagement
             }
             return students;
         }
+        public List<Meeting> GetMeetingsBySupervisorId(int supervisorId)
+        {
+            List<Meeting> meetings = new List<Meeting>();
+            using (var sqlite_cmd = sqlite_conn.CreateCommand())
+            {
+                sqlite_cmd.CommandText = "SELECT * FROM MEETINGS WHERE SupervisorID = @SupervisorID";
+                sqlite_cmd.Parameters.AddWithValue("@SupervisorID", supervisorId);
+
+                using (var reader = sqlite_cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        meetings.Add(new Meeting
+                        {
+                            // Assuming Meeting class has properties like Id, StudentId, MeetingDate, etc.
+                            Id = Convert.ToInt32(reader["MeetingID"]),
+                            StudentId = Convert.ToInt32(reader["StudentID"]),
+                            MeetingDate = reader["MeetingDate"].ToString(),
+                            MeetingSubject = reader["MeetingSubject"].ToString(),
+                            MeetingNotes = reader["MeetingNotes"].ToString(),
+                            // ... other properties
+                        });
+                    }
+                }
+            }
+            return meetings;
+        }
 
 
 
