@@ -585,6 +585,49 @@ namespace Staff_Monitor_Engagement
                 }
             }
         }
+        public int GetSupervisorIdByUsername(string username)
+        {
+            using (var sqlite_cmd = sqlite_conn.CreateCommand())
+            {
+                sqlite_cmd.CommandText = "SELECT SupervisorID FROM PERSONAL_SUPERVISOR WHERE Username = @Username";
+                sqlite_cmd.Parameters.AddWithValue("@Username", username);
+
+                var result = sqlite_cmd.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
+                {
+                    return Convert.ToInt32(result);
+                }
+                else
+                {
+                    return -1; // Or handle this case as appropriate
+                }
+            }
+        }
+        public List<Student> GetStudentsBySupervisorId(int supervisorId)
+        {
+            List<Student> students = new List<Student>();
+            using (var sqlite_cmd = sqlite_conn.CreateCommand())
+            {
+                sqlite_cmd.CommandText = "SELECT * FROM STUDENT INNER JOIN RELATIONSHIP ON STUDENT.StudentID = RELATIONSHIP.StudentID WHERE RELATIONSHIP.SupervisorID = @SupervisorID";
+                sqlite_cmd.Parameters.AddWithValue("@SupervisorID", supervisorId);
+
+                using (var reader = sqlite_cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        students.Add(new Student
+                        {
+                            // Assuming Student class has properties like Id, FirstName, LastName, etc.
+                            Id = Convert.ToInt32(reader["StudentID"]),
+                            FirstName = reader["FirstName"].ToString(),
+                            LastName = reader["LastName"].ToString(),
+                            // ... other properties
+                        });
+                    }
+                }
+            }
+            return students;
+        }
 
 
 

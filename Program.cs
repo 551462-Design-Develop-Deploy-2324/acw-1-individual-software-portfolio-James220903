@@ -61,8 +61,16 @@ namespace Staff_Monitor_Engagement
                     }
                     break;
                 case UserRole.PersonalSupervisor:
-                    // Call a method to handle personal supervisor functionality
-                    // PersonalSupervisorUI.ShowMenu(); // Make sure you implement this
+                    int supervisorId = myDatabase.GetSupervisorIdByUsername(username);
+                    if (supervisorId != -1)
+                    {
+                        PersonalSupervisorUI supervisorUI = new PersonalSupervisorUI(myDatabase, supervisorId);
+                        supervisorUI.ShowMenu();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Supervisor ID not found.");
+                    }
                     break;
                 case UserRole.SeniorTutor:
                     // Call a method to handle senior tutor functionality
