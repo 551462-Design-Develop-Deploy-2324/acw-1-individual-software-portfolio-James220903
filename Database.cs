@@ -537,7 +537,7 @@ namespace Staff_Monitor_Engagement
             }
         }
 
-        private bool IsUserValid(string username, string plaintextPassword, string tableName)
+        public bool IsUserValid(string username, string plaintextPassword, string tableName)
         {
             using (var sqlite_cmd = sqlite_conn.CreateCommand())
             {
