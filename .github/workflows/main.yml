@@ -19,9 +19,18 @@ jobs:
       with:
         dotnet-version: '6.0.x' 
 
-    - name: Install Test Platform
-      working-directory: /home/runner/work/Staff Monitor Engagement UnitTest/obj/Release/net6.0
-      run: dotnet add package Microsoft.TestPlatform --version 17.5.0
+    - name: Dependency Restore
+      working-directory: ./Staff Monitor Engagement UnitTest
+      run: dotnet restore
+
+    - name: Project Build
+      working-directory: ./Staff Monitor Engagement UnitTest
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Project Test
+      working-directory: ./Staff Monitor Engagement UnitTest
+      run: dotnet test --no-build --verbosity normal
+
 
     - name: Dependency Restore
       run: dotnet restore
