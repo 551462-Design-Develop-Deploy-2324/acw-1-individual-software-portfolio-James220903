@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3 # Update to use the latest version
 
     - name: Setup .NET environment
       uses: actions/setup-dotnet@v3
