@@ -3,12 +3,11 @@ name: unit tests
 on:
   push:
     branches:
-    - main
+    - main  # Make sure this matches your actual branch name
     
 jobs:
   build:
     runs-on: ubuntu-latest
-
 
     steps:
     - name: Checkout Repository
@@ -19,13 +18,11 @@ jobs:
       with:
         dotnet-version: '6.0.x' 
 
-    - name: Install Test Platform
-      working-directory: /home/runner/work/Staff Monitor Engagement UnitTest
-      run: dotnet add package Microsoft.TestPlatform --version 17.5.0
-
     - name: Dependency Restore
       run: dotnet restore
+
     - name: Project Build
       run: dotnet build
+
     - name: Project Test
       run: dotnet test
