@@ -8,8 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -30,10 +28,3 @@ jobs:
     - name: Project Test
       working-directory: ./Staff Monitor Engagement UnitTest
       run: dotnet test --no-build --verbosity normal
-
-
-    - name: Dependency Restore
-      run: dotnet restore
-    - name: Project Build
-      run: dotnet build
-    - name: Project Test
