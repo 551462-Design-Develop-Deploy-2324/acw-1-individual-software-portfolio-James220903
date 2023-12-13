@@ -16,6 +16,4 @@ namespace Staff_Monitor_Engagement_UnitTest
             Student student = new Student();
         }
     }
-    
-
 }
